@@ -113,17 +113,33 @@ public class FareCalculatorServiceTest {
     }
 
     @Test
+    public void offerFreeParkingForTheFirst30Minutes(){
+        Date inTime = new Date();
+        inTime.setTime( System.currentTimeMillis() - (  30 * 60 * 1000) );// 30 minutes
+        Date outTime = new Date();
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
+
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals( (0 * Fare.CAR_RATE_PER_HOUR) , ticket.getPrice());
+    }
+
+    @Test
     public void calculateFareCarWithMoreThanADayParkingTime(){
         Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() - (  24 * 60 * 60 * 1000) );//24 hours parking time should give 24 * parking fare per hour
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
-System.out.println(inTime+"\n"+outTime);
+
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
         assertEquals( (24 * Fare.CAR_RATE_PER_HOUR) , ticket.getPrice());
     }
+
+
 
 }

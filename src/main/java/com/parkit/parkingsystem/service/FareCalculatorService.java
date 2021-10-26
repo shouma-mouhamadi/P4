@@ -16,7 +16,6 @@ public class FareCalculatorService {
         outHour.setTime(ticket.getOutTime());
         float durationInDays = outHour.get(Calendar.DAY_OF_MONTH) - inHour.get(Calendar.DAY_OF_MONTH);
         float durationInHours = outHour.get(Calendar.HOUR_OF_DAY) - inHour.get(Calendar.HOUR_OF_DAY) + (24 * durationInDays);
-        //float durationInMinutes = 60 - inHour.get(Calendar.MINUTE) + outHour.get(Calendar.MINUTE);
         float durationInMinutes = outHour.get(Calendar.MINUTE) - inHour.get(Calendar.MINUTE) + (60 * durationInHours) ;
 
 
@@ -34,7 +33,11 @@ public class FareCalculatorService {
                 if(durationInHours>0) {
                     ticket.setPrice(durationInHours * Fare.CAR_RATE_PER_HOUR);
                 }else {
-                    ticket.setPrice((durationInMinutes/60) * Fare.CAR_RATE_PER_HOUR);
+                    if(durationInMinutes<=30){
+                        ticket.setPrice(0);
+                    }else {
+                        ticket.setPrice((durationInMinutes/60) * Fare.CAR_RATE_PER_HOUR);
+                    }
                 }
                 break;
             }
@@ -42,7 +45,11 @@ public class FareCalculatorService {
                 if(durationInHours>0) {
                     ticket.setPrice(durationInHours * Fare.BIKE_RATE_PER_HOUR);
                 }else {
-                    ticket.setPrice((durationInMinutes/60) * Fare.BIKE_RATE_PER_HOUR);
+                    if(durationInMinutes<=30){
+                        ticket.setPrice(0);
+                    }else {
+                        ticket.setPrice((durationInMinutes/60) * Fare.BIKE_RATE_PER_HOUR);
+                    }
                 }
                 break;
             }
@@ -52,6 +59,6 @@ public class FareCalculatorService {
         System.out.println("Début du stationnement : " + ticket.getInTime());
         System.out.println("Fin du stationnement : " + ticket.getOutTime());
         System.out.println("Durée : " + durationInHours + " Heure(s) et " + durationInMinutes + " Minute(s)");
-        System.out.println("Prix : " + ticket.getPrice() + " €");
+        System.out.println("Prix : " + ticket.getPrice() + "€");
     }
 }
