@@ -11,6 +11,20 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.apache.kafka:kafka_2.10:0.8.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.kafka:kafka-clients:0.8.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.6" level="project" />
+    <orderEntry type="library" name="Maven: net.jpountz.lz4:lz4:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial.snappy:snappy-java:1.1.1.6" level="project" />
+    <orderEntry type="library" name="Maven: com.yammer.metrics:metrics-core:2.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.6" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: jline:jline:0.9.94" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:3.8.1" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty:3.7.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.jopt-simple:jopt-simple:3.2" level="project" />
+    <orderEntry type="library" name="Maven: com.101tec:zkclient:0.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.12.1" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.17" level="project" />
@@ -48,7 +62,6 @@
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:3.0.22" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:file-management:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-9" level="project" />
-    <orderEntry type="library" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: classworlds:classworlds:1.1-alpha-2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.reporting:maven-reporting-api:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.doxia:doxia-sink-api:1.0" level="project" />
@@ -89,7 +102,6 @@
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-common-artifact-filters:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-shared-utils:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-artifact-transfer:0.9.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interpolation:1.24" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-archiver:3.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.11" level="project" />

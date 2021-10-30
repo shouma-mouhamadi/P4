@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class FareCalculatorService {
 
-    public void calculateFare(Ticket ticket) {
+    public double calculateFare(Ticket ticket) {
         if ((ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime()))) {
             throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
         }
@@ -60,5 +60,7 @@ public class FareCalculatorService {
         System.out.println("Fin du stationnement : " + ticket.getOutTime());
         System.out.println("Durée : " + durationInHours + " Heure(s) et " + durationInMinutes + " Minute(s)");
         System.out.println("Prix : " + ticket.getPrice() + "€");
+
+        return ticket.getPrice();
     }
 }
