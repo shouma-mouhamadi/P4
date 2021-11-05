@@ -2,11 +2,12 @@ package com.parkit.parkingsystem.service;
 
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
+
 import java.util.Calendar;
 
 public class FareCalculatorService {
 
-    public double calculateFare(Ticket ticket) {
+    public void calculateFare(Ticket ticket) {
         if ((ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime()))) {
             throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
         }
@@ -14,53 +15,52 @@ public class FareCalculatorService {
         Calendar outHour = Calendar.getInstance();
         inHour.setTime(ticket.getInTime());
         outHour.setTime(ticket.getOutTime());
-        float durationInDays = outHour.get(Calendar.DAY_OF_MONTH) - inHour.get(Calendar.DAY_OF_MONTH);
-        float durationInHours = outHour.get(Calendar.HOUR_OF_DAY) - inHour.get(Calendar.HOUR_OF_DAY) + (24 * durationInDays);
-        float durationInMinutes = outHour.get(Calendar.MINUTE) - inHour.get(Calendar.MINUTE) + (60 * durationInHours) ;
 
+        long diff = outHour.getTimeInMillis() - inHour.getTimeInMillis(); // calcul de la durée de stationnement
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long durationMinutes = (diffDays * 24 * 60) + (diffHours * 60) + (diffMinutes);
 
-        if(durationInMinutes<60){ // Moins d'une heure de stationnement
-            durationInHours=0;
-        }else {
-            durationInMinutes-=60; // Plus d'une heure de stationnement
-        }
-
-
-
-        // calcul du tarif selon le vehicule
+        double parkingType; // calcul du tarif selon le type de vehicule
         switch (ticket.getParkingSpot().getParkingType()) {
             case CAR: {
-                if(durationInHours>0) {
-                    ticket.setPrice(durationInHours * Fare.CAR_RATE_PER_HOUR);
-                }else {
-                    if(durationInMinutes<=30){
-                        ticket.setPrice(0);
-                    }else {
-                        ticket.setPrice((durationInMinutes/60) * Fare.CAR_RATE_PER_HOUR);
-                    }
-                }
+                parkingType = Fare.CAR_RATE_PER_HOUR;
                 break;
             }
             case BIKE: {
-                if(durationInHours>0) {
-                    ticket.setPrice(durationInHours * Fare.BIKE_RATE_PER_HOUR);
-                }else {
-                    if(durationInMinutes<=30){
-                        ticket.setPrice(0);
-                    }else {
-                        ticket.setPrice((durationInMinutes/60) * Fare.BIKE_RATE_PER_HOUR);
-                    }
-                }
+                parkingType = Fare.BIKE_RATE_PER_HOUR;
                 break;
             }
             default:
                 throw new IllegalArgumentException("Unknow Parking Type");
         }
-        System.out.println("Début du stationnement : " + ticket.getInTime());
-        System.out.println("Fin du stationnement : " + ticket.getOutTime());
-        System.out.println("Durée : " + durationInHours + " Heure(s) et " + durationInMinutes + " Minute(s)");
-        System.out.println("Prix : " + ticket.getPrice() + "€");
 
-        return ticket.getPrice();
+        if(durationMinutes <= 30){ // les 30 premières minutes de stationnement sont gratuites
+            ticket.setPrice(0);
+        }else {
+            ticket.setPrice( (diffDays * 24 * parkingType) + (diffHours * parkingType) + (diffMinutes * (parkingType/60)) + (diffSeconds * (parkingType/60*60)) );
+        }
+        double price = Math.round(ticket.getPrice()*100.0)/100.0; // on arrondi le prix au dixième de centimes près
+
+        /*System.out.println("PARKING TICKET");
+        System.out.print("Parking lot number : ");
+        System.out.println(ticket.getParkingSpot().getId());
+        System.out.print("Parking Type : ");
+        System.out.println(ticket.getParkingSpot().getParkingType());
+        System.out.print("Vehicule registration number : ");
+        System.out.println(ticket.getVehicleRegNumber());
+        System.out.print("Arrival : ");
+        System.out.println(ticket.getInTime());
+        System.out.print("Departure : ");
+        System.out.println(ticket.getOutTime());
+        System.out.print("Duration : ");
+        System.out.print(diffDays + " days, ");
+        System.out.print(diffHours + " hours, ");
+        System.out.print(diffMinutes + " minutes, ");
+        System.out.println(diffSeconds + " seconds");
+        System.out.println("Fare : " + price + "$\n");*/
+
     }
 }

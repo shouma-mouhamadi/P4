@@ -36,6 +36,9 @@ public class ParkingService {
                 parkingSpotDAO.updateParking(parkingSpot);//allot this parking space and mark it's availability as false
 
                 Date inTime = new Date();
+
+                inTime.setTime( System.currentTimeMillis() - (120 * 60 * 1000) ); // 120 minutes de stationnement
+
                 Ticket ticket = new Ticket();
                 //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
                 //ticket.setId(ticketID);
