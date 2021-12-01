@@ -43,7 +43,7 @@ public class ParkingService {
                 Ticket ticket = new Ticket();
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
-                ticket.setPrice(-1);
+                ticket.setPrice(0);
                 ticket.setInTime(inTime);
                 ticket.setOutTime(null);
                 ticketDAO.saveTicket(ticket);
@@ -99,7 +99,7 @@ public class ParkingService {
         }
     }
 
-    public void processExitingVehicle() {
+    public void  processExitingVehicle() {
         try{
             String vehicleRegNumber;
             vehicleRegNumber = getVehicleRegNumber();
@@ -107,6 +107,7 @@ public class ParkingService {
             Date outTime = new Date();
             ticket.setOutTime(outTime);
             fareCalculatorService.calculateFare(ticket);
+            applyReduction(ticket);
             if(ticketDAO.updateTicket(ticket)) {
                 ParkingSpot parkingSpot = ticket.getParkingSpot();
                 parkingSpot.setAvailable(true);
@@ -120,4 +121,14 @@ public class ParkingService {
             logger.error("Unable to process exiting vehicle",e);
         }
     }
+
+    public void applyReduction(Ticket ticket) {
+        double price = Math.round(ticket.getPrice()*100.0)/100.0;  // we round the price to the nearest tenth of a cent
+        if(ticketDAO.userIsRecurrent(ticket.getVehicleRegNumber())){ // the user is recurrent
+            double reducedPrice = ticket.getPrice() - ((5*ticket.getPrice())/100); // we apply the 5% reduction
+            price = Math.round(reducedPrice*100.0)/100.0;
+        }
+        ticket.setPrice(price);
+    }
+
 }

@@ -95,18 +95,20 @@ public class TicketDAO {
         }
     }
 
-    public int userIsRecurrent(String vehicleRegNumber) {
+    public boolean userIsRecurrent(String vehicleRegNumber) {
         Connection con = null;
-        String result="";
-        System.out.println("Matricule : "+vehicleRegNumber);
+        int hits=0;
+        boolean result=false;
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.CHECK_RECURRING_USER);
+            PreparedStatement ps = con.prepareStatement(DBConstants.COUNT_USER_HITS);
             ps.setString(1,vehicleRegNumber);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                result = rs.getString("count");
-                System.out.println("User Reccurrence : "+result);
+                hits = rs.getInt("numberOfHits");
+                if(hits>1){
+                    result=true;
+                }
             }
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
@@ -115,9 +117,7 @@ public class TicketDAO {
         }finally {
             dataBaseConfig.closeConnection(con);
         }
-
-        return Integer.parseInt(result);
-
+        return result;
     }
 
 }

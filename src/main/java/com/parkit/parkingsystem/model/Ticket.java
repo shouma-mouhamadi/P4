@@ -58,4 +58,14 @@ public class Ticket {
     public void setOutTime(Date outTime) {
         this.outTime = outTime;
     }
+
+    public void print(){
+        System.out.println("TICKET_ID : " + this.getId());
+        System.out.println("PARKING_NUMBER : " + this.getParkingSpot().getId());
+        System.out.println("VEHICLE_REG_NUMBER : " + this.getVehicleRegNumber());
+        System.out.println("PRICE : " + this.getPrice() + "€");
+        System.out.println("IN_TIME : " + this.getInTime());
+        System.out.println("OUT_TIME : " + this.getOutTime());
+        System.out.println("PARKING_TYPE : " + this.getParkingSpot().getParkingType());
+    }
 }

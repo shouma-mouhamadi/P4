@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,7 +45,7 @@ public class ParkingDataBaseIT {
     @BeforeEach
     private void setUpPerTest() throws Exception {
         when(inputReaderUtil.readSelection()).thenReturn(1);
-        when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("AB145DZ");
+        when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("GHIJKL");
         dataBasePrepareService.clearDataBaseEntries();
     }
 
@@ -60,9 +60,14 @@ public class ParkingDataBaseIT {
         parkingService.processIncomingVehicle();
 
         Ticket ticket = ticketDAO.getTicket(inputReaderUtil.readVehicleRegistrationNumber());
-        assertEquals(inputReaderUtil.readVehicleRegistrationNumber() , ticket.getVehicleRegNumber());
+        assertEquals(inputReaderUtil.readVehicleRegistrationNumber() , ticket.getVehicleRegNumber()); // check that a ticket is actualy saved in DB
+        assertFalse(ticket.getParkingSpot().isAvailable()); // Parking table is updated with availability
 
-        //TODO: check that a ticket is actualy saved in DB and Parking table is updated with availability
+        ticket.print();
+        ParkingSpot parkingSpot = ticket.getParkingSpot();
+        System.out.println(parkingSpotDAO.getParkingSpotAvailability(parkingSpot));
+
+
     }
 
     @Test
@@ -70,7 +75,7 @@ public class ParkingDataBaseIT {
         testParkingACar();
 
         Ticket ticket = ticketDAO.getTicket(inputReaderUtil.readVehicleRegistrationNumber());
-        Date inTime = new Date(System.currentTimeMillis()-(1000*60*120)); // stationnement de 120 minutes
+        Date inTime = new Date(System.currentTimeMillis()-(1000*60*120));
         ticket.setInTime(inTime);
         ticketDAO.generateTicketTest(ticket);
 
@@ -78,7 +83,12 @@ public class ParkingDataBaseIT {
         parkingService.processExitingVehicle();
 
         Ticket ticket2 = ticketDAO.getTicket(inputReaderUtil.readVehicleRegistrationNumber());
-        assertEquals(inputReaderUtil.readVehicleRegistrationNumber() , ticket2.getVehicleRegNumber());
+        assertEquals(inputReaderUtil.readVehicleRegistrationNumber() , ticket2.getVehicleRegNumber()); // check that a ticket is actualy saved in DB
+
+        ticket2.print();
+
+        ParkingSpot parkingSpot = ticket2.getParkingSpot();
+        parkingSpotDAO.getParkingSpotAvailability(parkingSpot);
 
         //TODO: check that the fare generated and out time are populated correctly in the database
     }
