@@ -9,7 +9,7 @@ public class FareCalculatorService {
 
     public void calculateFare(Ticket ticket) {
         if ((ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime()))) {
-            throw new IllegalArgumentException("Out time provided is incorrect because " + ticket.getOutTime().toString());
+            throw new IllegalArgumentException("Out time provided is incorrect : " + ticket.getOutTime().toString());
         }
         Calendar inHour = Calendar.getInstance();
         Calendar outHour = Calendar.getInstance();
@@ -33,7 +33,7 @@ public class FareCalculatorService {
                 break;
             }
             default:
-                throw new IllegalArgumentException("Unknow Parking Type");
+                throw new IllegalArgumentException("Unknown Parking Type");
         }
         ticket.setPrice((durationMinutes/60.0)*parkingType);
         double price = Math.round(ticket.getPrice()*100.0)/100.0; // we round the price to the nearest tenth of a cent

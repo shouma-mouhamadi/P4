@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ticket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">parking-system</a> &gt; <a href="index.source.html" class="el_package">com.parkit.parkingsystem.model</a> &gt; <span class="el_source">Ticket.java</span></div><h1>Ticket.java</h1><pre class="source lang-java linenums">package com.parkit.parkingsystem.model;
+
+import java.util.Calendar;
+import java.util.Date;
+
+<span class="fc" id="L6">public class Ticket {</span>
+    private int id;
+    private ParkingSpot parkingSpot;
+    private String vehicleRegNumber;
+    private double price;
+    private Date inTime;
+    private Date outTime;
+
+    public int getId() {
+<span class="fc" id="L15">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L19">        this.id = id;</span>
+<span class="fc" id="L20">    }</span>
+
+    public ParkingSpot getParkingSpot() {
+<span class="fc" id="L23">        return parkingSpot;</span>
+    }
+
+    public void setParkingSpot(ParkingSpot parkingSpot) {
+<span class="fc" id="L27">        this.parkingSpot = parkingSpot;</span>
+<span class="fc" id="L28">    }</span>
+
+    public String getVehicleRegNumber() {
+<span class="fc" id="L31">        return vehicleRegNumber;</span>
+    }
+
+    public void setVehicleRegNumber(String vehicleRegNumber) {
+<span class="fc" id="L35">        this.vehicleRegNumber = vehicleRegNumber;</span>
+<span class="fc" id="L36">    }</span>
+
+    public double getPrice() {
+<span class="fc" id="L39">        return price;</span>
+    }
+
+    public void setPrice(double price) {
+<span class="fc" id="L43">        this.price = price;</span>
+<span class="fc" id="L44">    }</span>
+
+    public Date getInTime() {
+        // Une méthode peut exposer sa représentation interne en renvoyant une référence à un objet modifiable
+<span class="fc" id="L48">        Date inTime_copy = inTime;</span>
+<span class="fc" id="L49">        return inTime_copy;</span>
+    }
+
+    public void setInTime(Date inTime) {
+<span class="fc" id="L53">        Date inTime_copy = inTime;</span>
+<span class="fc" id="L54">        this.inTime = inTime_copy;</span>
+<span class="fc" id="L55">    }</span>
+
+    public Date getOutTime() {
+        // Une méthode peut exposer sa représentation interne en renvoyant une référence à un objet modifiable
+<span class="fc" id="L59">        Date outTime_copy = outTime;</span>
+<span class="fc" id="L60">        return outTime_copy;</span>
+    }
+
+    public void setOutTime(Date outTime) {
+<span class="fc" id="L64">        this.outTime = outTime;</span>
+<span class="fc" id="L65">    }</span>
+
+    public void print(){
+<span class="fc" id="L68">        System.out.println(&quot;TICKET_ID : &quot; + this.getId());</span>
+<span class="fc" id="L69">        System.out.println(&quot;PARKING_NUMBER : &quot; + this.getParkingSpot().getId());</span>
+<span class="fc" id="L70">        System.out.println(&quot;VEHICLE_REG_NUMBER : &quot; + this.getVehicleRegNumber());</span>
+<span class="fc" id="L71">        System.out.println(&quot;PRICE : &quot; + this.getPrice() + &quot;€&quot;);</span>
+<span class="fc" id="L72">        System.out.println(&quot;IN_TIME : &quot; + this.getInTime());</span>
+<span class="fc" id="L73">        System.out.println(&quot;OUT_TIME : &quot; + this.getOutTime());</span>
+<span class="fc" id="L74">        System.out.println(&quot;PARKING_TYPE : &quot; + this.getParkingSpot().getParkingType());</span>
+<span class="fc" id="L75">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

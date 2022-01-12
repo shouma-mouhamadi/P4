@@ -44,7 +44,9 @@ public class Ticket {
     }
 
     public Date getInTime() {
-        return inTime;
+        // Une méthode peut exposer sa représentation interne en renvoyant une référence à un objet modifiable
+        Date inTime_copy = this.inTime;
+        return inTime_copy;
     }
 
     public void setInTime(Date inTime) {
@@ -52,7 +54,9 @@ public class Ticket {
     }
 
     public Date getOutTime() {
-        return outTime;
+        // Une méthode peut exposer sa représentation interne en renvoyant une référence à un objet modifiable
+        Date outTime_copy = this.outTime;
+        return outTime_copy;
     }
 
     public void setOutTime(Date outTime) {

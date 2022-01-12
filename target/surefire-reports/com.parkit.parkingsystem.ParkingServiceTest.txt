@@ -1,0 +1,57 @@
+-------------------------------------------------------------------------------
+Test set: com.parkit.parkingsystem.ParkingServiceTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.969 s <<< FAILURE! - in com.parkit.parkingsystem.ParkingServiceTest
+processExitingUnknownType  Time elapsed: 0.922 s  <<< ERROR!
+java.lang.ExceptionInInitializerError
+Caused by: java.lang.ClassCastException: class sun.nio.cs.UTF_8 cannot be cast to class java.lang.Readable (sun.nio.cs.UTF_8 and java.lang.Readable are in module java.base of loader 'bootstrap')
+
+processIncomingErrorFetchingParkingNumber  Time elapsed: 0.031 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+
+processExitingForRecurentUser  Time elapsed: 0 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+
+processExitingError  Time elapsed: 0 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+
+processExitingCar  Time elapsed: 0.016 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+
+processExitingBike  Time elapsed: 0 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+
+processIncomingCar  Time elapsed: 0 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+
+processIncomingBike  Time elapsed: 0 s  <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedMockingSessionException: 
+
+Unfinished mocking session detected.
+Previous MockitoSession was not concluded with 'finishMocking()'.
+For examples of correct usage see javadoc for MockitoSession class.
+

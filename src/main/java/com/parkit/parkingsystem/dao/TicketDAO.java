@@ -27,6 +27,8 @@ public class TicketDAO {
             ps.setTimestamp(4, new Timestamp(ticket.getInTime().getTime()));
             ps.setTimestamp(5, (ticket.getOutTime() == null)?null: (new Timestamp(ticket.getOutTime().getTime())));
             ps.execute();
+            dataBaseConfig.closePreparedStatement(ps);
+            dataBaseConfig.closeConnection(con);
         }catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
         }finally {
@@ -71,6 +73,8 @@ public class TicketDAO {
             ps.setTimestamp(2, new Timestamp(ticket.getOutTime().getTime()));
             ps.setInt(3,ticket.getId());
             ps.execute();
+            dataBaseConfig.closePreparedStatement(ps);
+            dataBaseConfig.closeConnection(con);
             return true;
         }catch (Exception ex){
             logger.error("Error saving ticket info",ex);
@@ -80,7 +84,7 @@ public class TicketDAO {
         return false;
     }
 
-    public void generateTicketTest(Ticket ticket) {
+    public void generateTicket(Ticket ticket) {
         Connection con = null;
         try {
             con = dataBaseConfig.getConnection();
@@ -88,6 +92,7 @@ public class TicketDAO {
             ps.setTimestamp(1, new Timestamp(ticket.getInTime().getTime()));
             ps.setInt(2,ticket.getId());
             ps.execute();
+            dataBaseConfig.closePreparedStatement(ps);
         }catch (Exception ex){
             logger.error("Error saving ticket info",ex);
         }finally {
@@ -97,7 +102,7 @@ public class TicketDAO {
 
     public boolean userIsRecurrent(String vehicleRegNumber) {
         Connection con = null;
-        int hits=0;
+        int hits;
         boolean result=false;
         try {
             con = dataBaseConfig.getConnection();

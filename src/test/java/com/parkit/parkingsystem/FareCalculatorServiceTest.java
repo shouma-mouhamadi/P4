@@ -31,7 +31,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCar(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (60 * 60 * 1000) ); // 60 minutes de stationnement
+        inTime.setTime( System.currentTimeMillis() - (60 * 60 * 1000) ); // 60 minutes parking time
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
         ticket.setVehicleRegNumber("WG283TM");
@@ -45,7 +45,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareBike(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) ); // 60 minutes de stationnement
+        inTime.setTime( System.currentTimeMillis() - (60 * 60 * 1000) ); // 60 minutes parking time
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(2, ParkingType.BIKE,false);
         ticket.setVehicleRegNumber("MB774KC");
@@ -57,9 +57,9 @@ public class FareCalculatorServiceTest {
     }
 
     @Test
-    public void calculateFareUnknowType(){
+    public void calculateFareUnknownType(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) ); // 60 minutes de stationnement
+        inTime.setTime( System.currentTimeMillis() - (60 * 60 * 1000) ); // 60 minutes parking time
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(3, null,false);
         ticket.setVehicleRegNumber("NH569YO");
@@ -72,9 +72,9 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithFutureInTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) ); // 60 minutes de stationnement
+        inTime.setTime( System.currentTimeMillis() + (60 * 60 * 1000) ); // 60 minutes parking time
         Date outTime = new Date();
-        ParkingSpot parkingSpot = new ParkingSpot(5, ParkingType.CAR,false);
+        ParkingSpot parkingSpot = new ParkingSpot(4, ParkingType.CAR,false);
         ticket.setVehicleRegNumber("AZ335BC");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
@@ -85,9 +85,9 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareBikeWithFutureInTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) ); // 60 minutes de stationnement
+        inTime.setTime( System.currentTimeMillis() + (60 * 60 * 1000) ); // 60 minutes parking time
         Date outTime = new Date();
-        ParkingSpot parkingSpot = new ParkingSpot(4, ParkingType.BIKE,false);
+        ParkingSpot parkingSpot = new ParkingSpot(5, ParkingType.BIKE,false);
         ticket.setVehicleRegNumber("LX345SS");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
@@ -98,9 +98,9 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithLessThanOneHourParkingTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (  45 * 60 * 1000) );//45 minutes parking time should give 3/4th parking fare
+        inTime.setTime( System.currentTimeMillis() - (45 * 60 * 1000) );//45 minutes parking time should give 3/4th parking fare
         Date outTime = new Date();
-        ParkingSpot parkingSpot = new ParkingSpot(7, ParkingType.CAR,false);
+        ParkingSpot parkingSpot = new ParkingSpot(6, ParkingType.CAR,false);
         ticket.setVehicleRegNumber("HG657NY");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
@@ -118,7 +118,7 @@ public class FareCalculatorServiceTest {
         Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() - (45 * 60 * 1000) );//45 minutes parking time should give 3/4th parking fare
         Date outTime = new Date();
-        ParkingSpot parkingSpot = new ParkingSpot(6, ParkingType.BIKE,false);
+        ParkingSpot parkingSpot = new ParkingSpot(7, ParkingType.BIKE,false);
         ticket.setVehicleRegNumber("FD898MZ");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
@@ -130,7 +130,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithLessThanThirtyMinutesParkingTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (  30 * 60 * 1000) );// 30 minutes free
+        inTime.setTime( System.currentTimeMillis() - (30 * 60 * 1000) );// 30 minutes of free parking time
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(8, ParkingType.CAR,false);
         ticket.setVehicleRegNumber("IO420CV");
@@ -144,7 +144,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareBikeWithLessThanThirtyMinutesParkingTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (  30 * 60 * 1000) );// 30 minutes free
+        inTime.setTime( System.currentTimeMillis() - (30 * 60 * 1000) );// 30 minutes of free parking time
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(9, ParkingType.BIKE,false);
         ticket.setVehicleRegNumber("KL543JH");
@@ -158,7 +158,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithMoreThanADayParkingTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (24 * 60 * 60 * 1000) );//24 hours parking time should give 24 * parking fare per hour
+        inTime.setTime( System.currentTimeMillis() - (24 * 60 * 60 * 1000) );//24 hours parking time should give 24*parking fare per hour
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(10, ParkingType.CAR,false);
         ticket.setVehicleRegNumber("SF803GF");
@@ -172,7 +172,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareBikeWithMoreThanADayParkingTime(){
         Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (24 * 60 * 60 * 1000) );//24 hours parking time should give 24 * parking fare per hour
+        inTime.setTime( System.currentTimeMillis() - (24 * 60 * 60 * 1000) );//24 hours parking time should give 24*parking fare per hour
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(11, ParkingType.BIKE,false);
         ticket.setVehicleRegNumber("PU666TR");
